@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="">
 
-   <resultMap id="" type="">
+   <resultMap id="userMap" type="">
 
    </resultMap>
 
@@ -21,4 +21,11 @@
    <!--测试2-->
 
    <!--测试3-->
+
+    <!--测试4-->
+
+   <!--测试2-->
+
+   <!--ceshi6-->
+
 </mapper>
