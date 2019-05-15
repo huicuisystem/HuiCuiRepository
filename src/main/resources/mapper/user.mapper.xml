@@ -7,4 +7,6 @@
    <resultMap id="" type="">
 
    </resultMap>
+
+   <!--查询语句001-->
 </mapper>
