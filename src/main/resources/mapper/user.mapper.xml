@@ -5,7 +5,14 @@
 <mapper namespace="com.huicui.dao.UserMapper">
 
    <resultMap id="baseResult" type="com.huicui.entity.TbUser">
-      <id property=""></id>
+      <id property="userId" column="user_id" javaType="java.lang.Long"></id>
+      <result property="userName" column="user_name" javaType="java.lang.String"></result>
+      <result property="password" column="password" javaType="java.lang.String"></result>
+      <result property="salt" column="salt" javaType="java.lang.String"></result>
    </resultMap>
+
+   <select id="chenkUsername" resultMap="baseResult">
+      SELECT user_id,user_name,password,salt FROM tb_user where user_name=#{userName}
+   </select>
 
 </mapper>

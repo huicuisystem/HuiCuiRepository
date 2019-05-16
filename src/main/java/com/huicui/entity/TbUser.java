@@ -2,7 +2,6 @@ package com.huicui.entity;
 
 public class TbUser {
   private Long userId;
-  private Long detailsId;
   private String userName;
   private String password;
   private String salt;
@@ -13,14 +12,6 @@ public class TbUser {
 
   public void setUserId(Long userId) {
     this.userId = userId;
-  }
-
-  public Long getDetailsId() {
-    return detailsId;
-  }
-
-  public void setDetailsId(Long detailsId) {
-    this.detailsId = detailsId;
   }
 
   public String getUserName() {
