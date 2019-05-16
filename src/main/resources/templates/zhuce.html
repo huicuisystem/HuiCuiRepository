@@ -1,0 +1,751 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <base th:href="${#request.getContextPath()}+'/'"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>会员注册-聚橙网</title>
+<meta name="keywords" content="聚橙网" />
+<meta name="description" content="聚橙网打造国内专业的票务和演出订票平台" />
+<link rel="stylesheet" type="text/css" href="css/base.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<style>
+
+    .slider {
+        /*margin: 100px auto;*/
+        width: 340px;
+        height: 40px;
+        position: relative;
+        /*border-radius: 20px;*/
+        background-color: #dae2d0;
+        overflow: hidden;
+        text-align: center;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+    }
+
+    .slider_bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        background-color: #7AC23C;
+        z-index: 1;
+    }
+
+    .label {
+        width: 46px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 40px;
+        line-height: 38px;
+        border: 1px solid #cccccc;
+        background: #fff;
+        z-index: 3;
+        cursor: move;
+        color: #ff9e77;
+        font-size: 16px;
+        font-weight: 900;
+    }
+
+    .labelTip {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        font-size: 13px;
+        font-family: 'Microsoft Yahei', serif;
+        color: #787878;
+        line-height: 38px;
+        text-align: center;
+        z-index: 2;
+    }
+
+</style>
+<body>
+<div class="header">
+    <div class="w1204">
+        <div class="logo">
+            <a href="http://www.juooo.com/" class="juo"><h1 class="text-hide hide">聚橙网——汇聚每一个感动</h1></a>
+        </div>
+        <h2 class="title">汇聚每一个感动</h2>
+        <!-- <a href="/" class="go_home">返回首页</a> -->
+    </div>
+</div>
+<!-- 背景banner交互，后台需设置图片与背景颜色2个属性 -->
+<div class="page register-page">
+    <div class="reg_page w1204">
+        <div class="reg-con">
+            <ul class="reg-tab js-reg-tab">
+                <li class="active">手机号注册</li>
+                <li class="">邮箱注册</li>
+            </ul>
+            <p class="reg-explain">注：非大陆用户请用邮箱注册</p>
+            <!-- 手机号注册 -->
+            <form class="js-reg">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">手机号码</label>
+                    <div class="col-sm-10">
+                        <input type="tel" class="form-control serial" placeholder="中国 +86  |" disabled>
+                        <input type="tel" class="form-control iphone" id="inputNumber" placeholder="">
+                        <p class="err-msg"></p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label">手机验证</label>
+                    <div class="col-sm-10">
+                        <input type="tel" class="form-control" id="inputVerify" placeholder="请输入验证码">
+                        <p class="err-msg">请输入正确验证码</p>
+                        <span class="btn-verify c_ff7 js-verify-code active">获取验证码</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label">登录密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPsw" placeholder="6~16个字符，字母和数字组合">
+                        <p class="err-msg"></p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label">密码确认</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputRePsw" placeholder="请再次输入你的登录密码">
+                        <p class="err-msg"></p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label">滑动验证</label>
+                    <div class="col-sm-10 slide-block-wrap">
+                        <div class="slide-block-slot">
+                            <div class="slider">
+                                <div class="slider_bg"></div>
+                                <span class="label">>></span> <span class="labelTip">拖动滑块验证</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- 邮箱注册 -->
+            <form class="js-reg hide">
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label">邮箱号码</label>
+                    <div class="col-sm-10">
+                        <input type="tel" class="form-control" id="inputEmail" placeholder="请输入邮箱">
+                        <p class="err-msg"></p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label">邮箱验证</label>
+                    <div class="col-sm-10">
+                        <input type="tel" class="form-control" id="inputEmailVerify" placeholder="请输入验证码">
+                        <p class="err-msg">请输入正确验证码</p>
+                        <span class="btn-verify c_ff7 js-verify-code active">获取验证码</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label">登录密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputEmailPsw" placeholder="6~16个字符，字母和数字组合">
+                        <p class="err-msg"></p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label">密码确认</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputEmailRePsw" placeholder="请再次输入你的登录密码">
+                        <p class="err-msg"></p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label">滑动验证</label>
+                    <div class="col-sm-10 slide-block-wrap">
+                        <div class="slide-block-slot">
+                            <div class="slider">
+                                <div class="slider_bg"></div>
+                                <span class="label">>></span> <span class="labelTip">拖动滑块验证</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="field-wrap">
+                <button id="register" class="gbtn">注 册</button>
+                <p>
+                    <span class="checkbox js-checkbox select"></span>
+                    我已阅读并同意
+                    <a href="http://www.juooo.com/about/termsService" class="agreement">《聚橙网服务协议》</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="foot">
+    <div class="mini-foot"><p><a href="http://www.juooo.com/about" target="_blank">关于聚橙</a> | <a href="http://www.juooo.com/about/contact" target="_blank">联系我们</a> | <a href="http://www.juooo.com/about/job" target="_blank">加入我们</a> | <a href="http://www.juooo.com/about/join" target="_blank">加盟聚橙</a> | <a href="http://www.juooo.com/about/terms-service" target="_blank">服务条款</a> | <a href="http://www.juooo.com/news" target="_blank">媒体报道</a> | <a href="http://www.juooo.com/about/partner" target="_blank">合作伙伴</a> | <a href="http://www.juooo.com/map" target="_blank">网站地图</a></p><p>全国统一客服电话：400-185-8666 深圳市聚橙网络技术有限公司</p><p>Copyright 2007-2016 © 聚橙网 粤B2-20070272 | 粤ICP备09218027号</p></div>
+</div>
+<script type="text/javascript" src="js/sea.js" id="seajsnode"></script>
+<script type="text/javascript" src="js/modules-config.js"></script>
+<script type="text/javascript">
+    seajs.use(['jquery','Dialog'], function($,Dialog) {
+        var _type = 0;
+        var token = '0ea65e47a2ad05ae83bce9f00122858e';
+        var slide = false;
+        var regexps = {
+                regMobile: /^1[13456789]\d{9}$/,
+                regEmail:/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/,
+                regPsw: /^\w{6,16}$/
+            };
+        // 手机号注册
+         var $js_reg_tab = $('.js-reg-tab'),
+             $inputNumber = $('#inputNumber'),
+             $register = $('#register'),
+             $jsVerifyCode = $('.js-verify-code'),
+             $inputVerify = $('#inputVerify'),
+             $inputPsw = $('#inputPsw'),
+             $inputRePsw = $('#inputRePsw'),
+             $js_reg = $('.js-reg');
+        // 邮箱注册
+        var $inputEmail = $('#inputEmail'),
+            $inputEmailVerify = $('#inputEmailVerify'),
+            $inputEmailPsw = $('#inputEmailPsw'),
+            $inputEmailRePsw = $('#inputEmailRePsw');  
+
+        $js_reg_tab.on('click', 'li', function (){
+            var _index = $(this).index();
+            _type = _index;
+            $(this).addClass('active').siblings().removeClass('active');
+            $js_reg.hide();
+            $js_reg.eq(_index).show();
+
+            // 重置滑动解锁并吧验证置为false
+            slider.reset();
+            slide = false;
+
+            // 获取验证码按钮置为不可点击状态
+            $jsVerifyCode.addClass('active');
+
+            if(_index == 0){
+                if($.trim($inputNumber.val()).length > 0){
+                    $register.addClass('btn-default')
+                }else{
+                    $register.removeClass('btn-default')
+                }
+            }else if(_index == 1){
+                if($.trim($inputEmail.val()).length > 0){
+                    $register.addClass('btn-default')
+                }else{
+                    $register.removeClass('btn-default')
+                }
+            }
+        });
+
+        // 手机号注册校验
+        $inputNumber.on('input', function (){
+            if($.trim($(this).val()).length > 0){
+                if(!$register.hasClass('btn-default')){
+                    $register.addClass('btn-default')
+                }
+            }else{
+                if($register.hasClass('btn-default')){
+                    $register.removeClass('btn-default')
+                }
+            }
+        });
+
+        // 手机号码失去焦点后事件
+        $inputNumber.on('blur', function (){
+            var $this = $(this);
+            var username = $this.val();
+           if(regexps.regMobile.test(username)){
+                $this.siblings('.err-msg').hide();
+                // 检验当前账号是否已注册
+                $.ajax({
+                   type:'POST',
+                   data: {
+                       username:username
+                   },
+                   url:'http://passport.juooo.com/User/checkUsernameIsReg',
+                   dataType : 'json',
+                   success:function(result){
+                       if(parseInt(result.code) === 0){
+                           $this.siblings('.err-msg').show().text(result.msg);
+                           $this.focus();
+                       }else{
+                           // 手机号验证成功后才可获取验证码
+                           $jsVerifyCode.removeClass('active');
+                       }
+                   }
+                });
+           }else{
+               $this.siblings('.err-msg').show().text('请输入正确手机号码');
+               $this.focus();
+           }
+        });
+
+        // 获取验证码
+        $jsVerifyCode.on('click', function (){
+            if($(this).hasClass('active')){
+                return;
+            }
+
+            var username;
+            if(_type == 0){
+                username = $inputNumber.val();
+                if(regexps.regMobile.test(username)){
+                    $inputNumber.siblings('.err-msg').hide()
+                }else{
+                    $inputNumber.siblings('.err-msg').show().text('请输入正确手机号码');
+                    return;
+                }
+            }else if(_type == 1){
+                username = $inputEmail.val();
+                if(regexps.regEmail.test(username)){
+                    $inputEmail.siblings('.err-msg').hide()
+                }else{
+                    $inputEmail.siblings('.err-msg').show().text('请输入正确邮箱');
+                    return;
+                }
+            }
+
+            // 开启倒计时
+            cronTimer(this);
+
+            $.ajax({
+                type:'POST',
+                data: {
+                    'username':username,
+                    'token':token,
+                    'flag':2
+                },
+                url:'http://passport.juooo.com/User/sendCodeRoute',
+                dataType : 'json',
+                success:function(result){
+                    if(parseInt(result.code) === 1){
+                        $inputEmail.siblings('.err-msg').show().text(result.msg);
+                    }else{
+                        Dialog.msg(result.msg)
+                    }
+                }
+            })
+        });
+
+        // 密码校验
+        $("#inputPsw, #inputEmailPsw").on('blur', function (){
+            if(regexps.regPsw.test($.trim($(this).val()))){
+                $(this).siblings('.err-msg').hide()
+            }else{
+                $(this).siblings('.err-msg').show().text('密码为6~16个字符，字母和数字组合')
+            }
+        });
+
+        // 密码确认
+        $("#inputRePsw, #inputEmailRePsw").on('blur', function (){
+            if(_type == 0){
+                var _psw = $inputPsw.val();
+            }else if(_type == 1){
+                var _psw = $inputEmailPsw.val();
+            }
+            if($.trim($(this).val()).length <=0 ){
+                $(this).siblings('.err-msg').show().text('确认密码不能为空');
+            }else if($.trim(_psw) !== $.trim($(this).val())){
+                $(this).siblings('.err-msg').show().text('两次密码不一致');
+            }else{
+                $(this).siblings('.err-msg').hide()
+            }
+        });
+
+        /* 邮箱注册 */
+        $inputEmail.on('input', function (){
+            if($.trim($(this).val()).length > 0){
+                if(!$register.hasClass('btn-default')){
+                    $register.addClass('btn-default')
+                }
+            }else{
+                if($register.hasClass('btn-default')){
+                    $register.removeClass('btn-default')
+                }
+            }
+        });
+
+        // 邮箱账号失去焦点后事件
+        $inputEmail.on('blur', function (){
+            var $this = $(this);
+            var username = $this.val();
+            if(regexps.regEmail.test(username)){
+                $this.siblings('.err-msg').hide();
+                // 检验当前账号是否已注册
+                $.ajax({
+                    type:'POST',
+                    data: {
+                        username:username
+                    },
+                    url:'http://passport.juooo.com/User/checkUsernameIsReg',
+                    dataType : 'json',
+                    success:function(result){
+                        if(parseInt(result.code) === 0){
+                            $this.siblings('.err-msg').show().text(result.msg);
+                            $this.focus();
+                        }else{
+                            // 邮箱验证成功后才可获取验证码
+                            $jsVerifyCode.removeClass('active');
+                        }
+                    }
+                });
+            }else{
+                $this.siblings('.err-msg').show().text('请输入正确邮箱地址');
+                $this.focus();
+            }
+        });
+
+        // 服务协议选择box
+        $('.js-checkbox').on('click', function(){
+            if($(this).hasClass('select')){
+                $(this).removeClass('select')
+            }else{
+                $(this).addClass('select')
+            }
+        });
+
+        // 注册
+        $register.on('click', function (){
+            if(!$('.js-checkbox').hasClass('select')){
+                Dialog.msg('请阅读聚橙网服务协议并勾选');
+               return;
+            }
+
+            if(!slide){
+                Dialog.msg('验证成功后才可提交注册');
+                return;
+            }
+
+            var username,code,password,secPwd,registerType;
+            var $code,$password,$secPwd;
+            if(_type == 0){ // 手机注册
+                username = $inputNumber.val();
+                if($.trim(username).length <=0 ){
+                    $inputNumber.siblings('.err-msg').show().text('手机号不能为空');
+                    $inputNumber.focus();
+                    return;
+                }else if(regexps.regMobile.test(username)){
+                    $inputNumber.siblings('.err-msg').hide()
+                }else{
+                    $inputNumber.siblings('.err-msg').show().text('请输入正确手机号码');
+                    $inputNumber.focus();
+                    return;
+                }
+
+                $code = $inputVerify;
+                $password = $inputPsw;
+                $secPwd = $inputRePsw;
+                registerType = 1;
+            }else if(_type == 1){ // 邮箱注册
+                username = $inputEmail.val();
+                if($.trim(username).length <=0 ){
+                    $inputEmail.siblings('.err-msg').show().text('邮箱号不能为空');
+                    $inputEmail.focus();
+                    return;
+                }else if(regexps.regEmail.test(username)){
+                    $inputEmail.siblings('.err-msg').hide()
+                }else{
+                    $inputEmail.siblings('.err-msg').show().text('请输入正确邮箱');
+                    $inputEmail.focus();
+                    return;
+                }
+
+                $code = $inputEmailVerify;
+                $password = $inputEmailPsw;
+                $secPwd = $inputEmailRePsw;
+                registerType = 2;
+            }
+
+            code = $code.val();
+            password = $password.val();
+            secPwd = $secPwd.val();
+
+            if($.trim(code).length <= 0){
+                $code.siblings('.err-msg').show().text('验证码不能为空');
+                $code.focus();
+                return;
+            }
+
+            if($.trim(password).length <= 0){
+                $password.siblings('.err-msg').show().text('密码不能为空');
+                $password.focus();
+                return;
+            }else if(regexps.regPsw.test($.trim(password))){
+                $password.siblings('.err-msg').hide()
+            }else {
+                $password.siblings('.err-msg').show().text('密码为6~16个字符，字母和数字组合');
+                $password.focus();
+                return;
+            }
+
+            if($.trim(secPwd).length <= 0){
+                $secPwd.siblings('.err-msg').show().text('确认密码不能为空');
+                return;
+            }else if(password !== secPwd){
+                $secPwd.siblings('.err-msg').show().text('两次密码不一致');
+                return;
+            }else {
+                $secPwd.siblings('.err-msg').hide()
+            }
+
+            $.ajax({
+                type:'POST',
+                data: {
+                    username: username,
+                    code: code,
+                    password: password,
+                    secPwd: secPwd,
+                    registerType: registerType
+                },
+                url:"http://passport.juooo.com/User/doRegisterRoute",
+                dataType : 'json',
+                success:function(result){
+                    Dialog.msg(result.msg);
+                    sleep(2000);
+                   if(parseInt(result.code) === 1) {
+                       window.location.href = 'http://passport.juooo.com/User/login';
+                   }
+                }
+            })
+        });
+
+        // 延时执行
+        function sleep(delay) {
+            var start = (new Date()).getTime();
+            while ((new Date()).getTime() - start < delay) {
+                continue;
+            }
+        }
+
+        // 定时计时器
+        function cronTimer(obj) {
+            var second = 60;
+            $(obj).text(second + 's后重发').addClass('active');
+            var timer = setInterval(function (){
+                second--;
+                if(second <= 0){
+                    $(obj).text('获取验证码').removeClass('active');
+                    clearInterval(timer);
+                    $('.success-msg').hide();
+                    return;
+                }
+                $(obj).text(second + 's后重发');
+            }, 1000);
+        }
+
+        /********************* 滑动解锁代码 ********************/
+        /**
+         * jquery plugin -- jquery.slideunlock.js
+         * Description: a slideunlock plugin based on jQuery
+         * Version: 1.1
+         * Author: Dong Yuhao
+         * created: March 27, 2016
+         */
+        ;(function ($,window,document,undefined) {
+            function SliderUnlock(elm, options, success){
+                var me = this;
+                var $elm = me.checkElm(elm) ? $(elm) : $;
+                success = me.checkFn(success) ? success : function(){};
+
+                var opts = {
+                    successLabelTip:  "Successfully Verified",
+                    duration:  200,
+                    swipestart:  false,
+                    min:  0,
+                    max:  $elm.width(),
+                    index:  0,
+                    IsOk:  false,
+                    lableIndex:  0
+                };
+
+                opts = $.extend(opts, options||{});
+
+                //$elm
+                me.elm = $elm;
+                //opts
+                me.opts = opts;
+                //是否开始滑动
+                me.swipestart = opts.swipestart;
+                //最小值
+                me.min = opts.min;
+                //最大值
+                me.max = opts.max;
+                //当前滑动条所处的位置
+                me.index = opts.index;
+                //是否滑动成功
+                me.isOk = opts.isOk;
+                //滑块宽度
+                me.labelWidth = me.elm.find('.label').width();
+                //滑块背景
+                me.sliderBg = me.elm.find('.slider_bg');
+                //鼠标在滑动按钮的位置
+                me.lableIndex = opts.lableIndex;
+                //success
+                me.success = success;
+            }
+
+            SliderUnlock.prototype.init = function () {
+                var me = this;
+
+                me.updateView();
+                me.elm.find(".label").on("mousedown", function (event) {
+                    var e = event || window.event;
+                    me.lableIndex = e.clientX - this.offsetLeft;
+                    me.handerIn();
+                }).on("mousemove", function (event) {
+                    me.handerMove(event);
+                }).on("mouseup", function (event) {
+                    me.handerOut();
+                }).on("mouseout", function (event) {
+                    me.handerOut();
+                }).on("touchstart", function (event) {
+                    var e = event || window.event;
+                    me.lableIndex = e.originalEvent.touches[0].pageX - this.offsetLeft;
+                    me.handerIn();
+                }).on("touchmove", function (event) {
+                    me.handerMove(event, "mobile");
+                }).on("touchend", function (event) {
+                    me.handerOut();
+                });
+            };
+
+            /**
+             * 鼠标/手指接触滑动按钮
+             */
+            SliderUnlock.prototype.handerIn = function () {
+                var me = this;
+                me.swipestart = true;
+                me.min = 0;
+                me.max = me.elm.width();
+            };
+
+            /**
+             * 鼠标/手指移出
+             */
+            SliderUnlock.prototype.handerOut = function () {
+                var me = this;
+                //停止
+                me.swipestart = false;
+                if (me.index + me.labelWidth < me.max) {
+                    me.reset();
+                }
+            };
+
+            /**
+             * 鼠标/手指移动
+             * @param event
+             * @param type
+             */
+            SliderUnlock.prototype.handerMove = function (event, type) {
+                var me = this;
+                if (me.swipestart) {
+                    event.preventDefault();
+                    event = event || window.event;
+                    if (type == "mobile") {
+                        me.index = event.originalEvent.touches[0].pageX - me.lableIndex;
+                    } else {
+                        me.index = event.clientX - me.lableIndex;
+                    }
+                    me.move();
+                }
+            };
+
+            /**
+             * 鼠标/手指移动过程
+             */
+            SliderUnlock.prototype.move = function () {
+                var me = this;
+                if ((me.index + me.labelWidth) >= me.max) {
+                    me.index = me.max - me.labelWidth;
+                    //停止
+                    me.swipestart = false;
+                    //解锁
+                    me.isOk = true;
+                }
+                if (me.index < 0) {
+                    me.index = me.min;
+                    //未解锁
+                    me.isOk = false;
+                }
+                if (me.index+me.labelWidth == me.max && me.max > 0 && me.isOk) {
+                    //解锁默认操作
+                    $('#label').unbind().next('#labelTip').
+                    text(me.opts.successLabelTip).css({'color': '#fff'});
+
+                    me.success();
+                }
+                me.updateView();
+            };
+
+
+            /**
+             * 更新视图
+             */
+            SliderUnlock.prototype.updateView = function () {
+                var me = this;
+
+                me.sliderBg.css('width', me.index);
+                me.elm.find(".label").css("left", me.index + "px")
+            };
+
+            /**
+             * 重置slide的起点
+             */
+            SliderUnlock.prototype.reset = function () {
+                var me = this;
+
+                me.index = 0;
+                me.sliderBg .animate({'width':0},me.opts.duration);
+                me.elm.find(".label").animate({left: me.index}, me.opts.duration)
+                    .next(".lableTip").animate({opacity: 1}, me.opts.duration);
+                me.updateView();
+            };
+
+            /**
+             * 检测元素是否存在
+             * @param elm
+             * @returns {boolean}
+             */
+            SliderUnlock.prototype.checkElm = function (elm) {
+                if($(elm).length > 0){
+                    return true;
+                }else{
+                    throw "this element does not exist.";
+                }
+            };
+
+            /**
+             * 检测传入参数是否是function
+             * @param fn
+             * @returns {boolean}
+             */
+            SliderUnlock.prototype.checkFn = function (fn) {
+                if(typeof fn === "function"){
+                    return true;
+                }else{
+                    throw "the param is not a function.";
+                }
+            };
+
+            window['SliderUnlock'] = SliderUnlock;
+        })(jQuery, window, document);
+
+        var slider = new SliderUnlock(".slider",{
+            successLabelTip : "验证成功"
+        },function(){
+            slide = true;
+        });
+        slider.init();
+    })
+</script>
+<script>
+
+
+</script>
+</body>
+</html>
